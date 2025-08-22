@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Asad Waqas - Flutter Developer</title>
+    <title>Asad Waqas - Flutter Developer Portfolio</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,218 +13,498 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Poppins', sans-serif;
             line-height: 1.6;
             color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #f8f9fa;
         }
 
-        .container {
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
             max-width: 1200px;
             margin: 0 auto;
-            background: white;
-            box-shadow: 0 0 30px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
         }
 
-        /* Header Section */
-        .header {
-            background: linear-gradient(135deg, #2c3e50, #34495e);
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: #3498db;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #3498db;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: #333;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 3rem 2rem;
             text-align: center;
             position: relative;
             overflow: hidden;
         }
 
-        .header::before {
+        .hero::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="rgba(255,255,255,0.1)"><polygon points="0,0 0,100 1000,80 1000,0"/></svg>');
-            background-size: cover;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="rgba(255,255,255,0.1)"><path d="M0,0 C150,100 350,0 500,50 C650,100 850,0 1000,50 L1000,0 Z"/></svg>');
+            background-size: 100% 100px;
+            background-repeat: repeat-x;
+            animation: wave 20s infinite linear;
         }
 
-        .header-content {
+        @keyframes wave {
+            0% { background-position-x: 0; }
+            100% { background-position-x: 1000px; }
+        }
+
+        .hero-content {
             position: relative;
             z-index: 1;
+            max-width: 800px;
+            padding: 0 2rem;
         }
 
-        .profile-img {
-            width: 150px;
-            height: 150px;
+        .profile-image {
+            width: 200px;
+            height: 200px;
             border-radius: 50%;
-            background: linear-gradient(45deg, #3498db, #2980b9);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1.5rem;
-            font-size: 3rem;
-            color: white;
-            border: 5px solid rgba(255,255,255,0.2);
+            margin: 0 auto 2rem;
+            border: 5px solid rgba(255,255,255,0.3);
+            overflow: hidden;
+            position: relative;
+            animation: float 6s ease-in-out infinite;
         }
 
-        .header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
             font-weight: 700;
-        }
-
-        .subtitle {
-            font-size: 1.2rem;
-            opacity: 0.9;
             margin-bottom: 1rem;
+            animation: fadeInUp 1s ease-out;
         }
 
-        .location {
-            font-size: 1rem;
-            opacity: 0.8;
+        .hero-subtitle {
+            font-size: 1.5rem;
             margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease-out 0.3s both;
         }
 
-        .contact-info {
+        .hero-description {
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+            line-height: 1.8;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .hero-buttons {
             display: flex;
+            gap: 1rem;
             justify-content: center;
-            gap: 2rem;
             flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.9s both;
         }
 
-        .contact-item {
-            display: flex;
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: inline-flex;
             align-items: center;
             gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: #3498db;
             color: white;
-            text-decoration: none;
-            transition: transform 0.3s ease;
         }
 
-        .contact-item:hover {
+        .btn-primary:hover {
+            background: #2980b9;
             transform: translateY(-2px);
-            color: #3498db;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
         }
 
-        /* Main Content */
-        .main-content {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 2rem;
-            padding: 2rem;
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
         }
 
-        .sidebar {
-            background: #f8f9fa;
-            padding: 2rem;
-            border-radius: 10px;
-            height: fit-content;
-        }
-
-        .content-section {
+        .btn-outline:hover {
             background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            margin-bottom: 2rem;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            color: #333;
+            transform: translateY(-2px);
+        }
+
+        /* About Section */
+        .about {
+            padding: 100px 0;
+            background: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
         }
 
         .section-title {
-            font-size: 1.5rem;
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
             color: #2c3e50;
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 3px solid #3498db;
             position: relative;
         }
 
         .section-title::after {
             content: '';
             position: absolute;
-            bottom: -3px;
-            left: 0;
-            width: 50px;
-            height: 3px;
-            background: #e74c3c;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(45deg, #3498db, #e74c3c);
+            border-radius: 2px;
         }
 
-        /* Experience Section */
-        .experience-item {
-            margin-bottom: 2rem;
-            padding: 1.5rem;
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 2rem;
             background: #f8f9fa;
-            border-radius: 8px;
-            border-left: 4px solid #3498db;
+            border-radius: 10px;
             transition: transform 0.3s ease;
         }
 
-        .experience-item:hover {
-            transform: translateX(10px);
+        .stat-item:hover {
+            transform: translateY(-5px);
         }
 
-        .job-header {
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #3498db;
+            display: block;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Skills Section */
+        .skills {
+            padding: 100px 0;
+            background: #f8f9fa;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .skill-category {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-10px);
+        }
+
+        .skill-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            border-radius: 50%;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .skill-category h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+        }
+
+        .skill-tag {
+            background: #ecf0f1;
+            color: #2c3e50;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: #3498db;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        /* Experience Section */
+        .experience {
+            padding: 100px 0;
+            background: white;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background: #3498db;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            background: inherit;
+            width: 50%;
+        }
+
+        .timeline-item.left {
+            left: 0;
+        }
+
+        .timeline-item.right {
+            left: 50%;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            right: -17px;
+            background: #3498db;
+            border: 4px solid white;
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .timeline-item.right::after {
+            left: -16px;
+        }
+
+        .timeline-content {
+            padding: 2rem;
+            background: white;
+            position: relative;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            transform: scale(1.02);
+        }
+
+        .experience-header {
             margin-bottom: 1rem;
         }
 
         .job-title {
+            font-size: 1.3rem;
             font-weight: 700;
             color: #2c3e50;
-            font-size: 1.1rem;
         }
 
         .company {
             color: #3498db;
             font-weight: 600;
+            margin: 0.5rem 0;
         }
 
         .duration {
-            color: #7f8c8d;
-            font-size: 0.9rem;
             background: #ecf0f1;
-            padding: 0.2rem 0.8rem;
+            color: #7f8c8d;
+            padding: 0.3rem 1rem;
             border-radius: 20px;
-        }
-
-        .job-description ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .job-description li {
-            margin-bottom: 0.5rem;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-
-        .job-description li::before {
-            content: '▶';
-            position: absolute;
-            left: 0;
-            color: #3498db;
+            font-size: 0.9rem;
+            display: inline-block;
         }
 
         /* Projects Section */
-        .project-item {
-            margin-bottom: 2rem;
-            padding: 1.5rem;
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-            border-radius: 10px;
-            border: 1px solid #dee2e6;
-            transition: all 0.3s ease;
+        .projects {
+            padding: 100px 0;
+            background: #f8f9fa;
         }
 
-        .project-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .project-image {
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+
+        .project-content {
+            padding: 2rem;
         }
 
         .project-title {
+            font-size: 1.4rem;
             font-weight: 700;
             color: #2c3e50;
-            font-size: 1.2rem;
             margin-bottom: 0.5rem;
         }
 
@@ -233,124 +514,132 @@
             margin-bottom: 1rem;
         }
 
-        .project-link {
-            display: inline-block;
-            margin-top: 1rem;
-            padding: 0.5rem 1rem;
-            background: #3498db;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background 0.3s ease;
+        .project-description {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
         }
 
-        .project-link:hover {
-            background: #2980b9;
-        }
-
-        /* Skills Section */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-        }
-
-        .skill-category {
-            background: white;
-            padding: 1rem;
-            border-radius: 8px;
-            border: 2px solid #ecf0f1;
-            transition: border-color 0.3s ease;
-        }
-
-        .skill-category:hover {
-            border-color: #3498db;
-        }
-
-        .skill-category h4 {
-            color: #2c3e50;
-            margin-bottom: 0.5rem;
-            font-size: 1rem;
-        }
-
-        .skill-tags {
+        .project-technologies {
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
+            margin-bottom: 1.5rem;
         }
 
-        .skill-tag {
-            background: #3498db;
-            color: white;
-            padding: 0.3rem 0.6rem;
+        .tech-tag {
+            background: #ecf0f1;
+            color: #2c3e50;
+            padding: 0.3rem 0.8rem;
             border-radius: 15px;
             font-size: 0.8rem;
-            transition: background 0.3s ease;
+            font-weight: 500;
         }
 
-        .skill-tag:hover {
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .project-link {
+            padding: 0.7rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .project-link.primary {
+            background: #3498db;
+            color: white;
+        }
+
+        .project-link.primary:hover {
             background: #2980b9;
+            transform: translateY(-2px);
         }
 
-        /* Education Section */
-        .education-item {
-            margin-bottom: 1.5rem;
-            padding: 1rem;
-            background: #f8f9fa;
-            border-radius: 8px;
-            border-left: 4px solid #e74c3c;
+        /* Contact Section */
+        .contact {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            text-align: center;
         }
 
-        .education-title {
-            font-weight: 700;
-            color: #2c3e50;
+        .contact .section-title {
+            color: white;
         }
 
-        .education-school {
-            color: #7f8c8d;
-            font-size: 0.9rem;
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
         }
 
-        /* Trainings & Achievements */
-        .list-item {
-            margin-bottom: 0.8rem;
-            padding: 0.8rem;
-            background: white;
-            border-radius: 5px;
-            border: 1px solid #ecf0f1;
+        .contact-item {
+            padding: 2rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.15);
+        }
+
+        .contact-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #3498db;
+        }
+
+        .contact-item h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-item a {
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Footer */
+        .footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #34495e;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
             transition: all 0.3s ease;
         }
 
-        .list-item:hover {
-            background: #f8f9fa;
-            border-color: #3498db;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .main-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .header {
-                padding: 2rem 1rem;
-            }
-            
-            .header h1 {
-                font-size: 2rem;
-            }
-            
-            .contact-info {
-                flex-direction: column;
-                align-items: center;
-                gap: 1rem;
-            }
-            
-            .job-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 0.5rem;
-            }
+        .social-link:hover {
+            background: #3498db;
+            transform: translateY(-3px);
         }
 
         /* Animations */
@@ -365,264 +654,598 @@
             }
         }
 
-        .content-section {
-            animation: fadeInUp 0.6s ease-out;
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background: white;
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0,0,0,0.05);
+                padding: 2rem 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .timeline::after {
+                left: 31px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+
+            .timeline-item.right {
+                left: 0%;
+            }
+
+            .timeline-item::after {
+                left: 15px;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-info {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 200px;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 0 1rem;
+            }
+
+            .profile-image {
+                width: 150px;
+                height: 150px;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .skill-category,
+            .project-card {
+                margin: 0 1rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Header Section -->
-        <header class="header">
-            <div class="header-content">
-                <div class="profile-img">
-                    <i class="fas fa-user"></i>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">Asad Waqas</div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="profile-image">
+                <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAoACgDASIAAhEBAxEB/8QAGwAAAQUBAQAAAAAAAAAAAAAABAACAwUGAQf/xAAsEAACAQMDAgUEAwEAAAAAAAABAgMABBEFEiExQVEGE2FxgSKRobHB0fDx/8QAGQEAAwEBAQAAAAAAAAAAAAAAAgMEAQAF/8QAIxEAAgICAgICAwEAAAAAAAAAAQIAEQMhEjEEQSJRYXGBkf/aAAwDAQACEQMRAD8A9moooorDCiiiiAiikTgZormTQB09qhZ8IWAJAoLV72TTdJ1fUYgC9pp88qA9CyoSP3FfObft/lxp8X+LfVjkfpFfQde0LU9dNzL6Jp9y4jP/AElO78K82vqMmM5VXKpIqPfRfXGU8ywKKdmjHLkdUHhgJAzDsD3NfGnvIZpGkkcuzHJJ7k19w8a6/Ha6Tb6dBI2+a4Bbg7SFBxmvkeoX6QMhjG4MckHt0rsdAKJJaNBkYHWsnDEzXKqoyQckCtrCoYqvOPpG1c5/1XPBaERJkYyNnOeoNOx7A1zE8EHitXEJnMLTHhOSTz6rjA4rKeFPBLa3KviDWoGi063OY7eUYM0g6fYdqveKdXk0LwvquqW6q0ttAwjDDI3McD9sn+a8w8O+NL7StPs76JVNXME6NHcjqOOh9P3r5/4vnYC4mPjfNtE9DLicjb7jgbJ8N6I9n4cu/EqBvPu5Ti6ZVbbBGOwJ7bsVm/7y3kVtrOgWN1K6Q+dDJKpyADja4z74NUviLx7quoLNYo6G3OC6FsDByCOOnBNZvwP4n8na3Zyn+9tJt9uvO/G4Fb7ZGT8gVt/1Pz2yYhTEG4lW9DLnhixtRlgJRz1rUeHy7aTOjQthJQRkd6q9OKMDgsVBPhGV8nBFdvYj2bfbM6/Ps8J6zPq1n5Mo0zaFZNSV+cE4PJrCwWELYLEn7V9J+HW8jQdLt5ASrxRhl7YcAZ+ppovFeqOW0hbOJZAQGnQLjPcc1jn+c1oQgbzKsOdScOygGvuOF9O02JTtJEMaqf1FaO2cHGCatJotw2kkDt3rN3UL2k7JIRkV9J5r6FXL3pJPzjMLwY2xO8OBkEY7VqPD2nG0iuFnJbfLvGT/ADVdo9mL3XLCO4m8uJpFUn4OBWxvLJZJHQYPqa8TxWPmZc9dFtcfaDKEGq4A5ro8MANpWJgPfJrxbQZNO3SKspV4w3LVMNesWgV4pC6GJB+7UJQvwdWs2Jj9cPOkJ9KynXiPXdPt9G1ew+prlpFSOILkEnGB9a9Qjg0TXdJunXTLe3vYAWFxBHsjZgOOOKcNB1e0jH2nNjqMf0T/2Q==" alt="Asad Waqas">
+            </div>
+            <h1>Asad Waqas</h1>
+            <p class="hero-subtitle">Flutter Developer & Mobile App Specialist</p>
+            <p class="hero-description">
+                Passionate Flutter developer with expertise in cross-platform mobile app development, 
+                Firebase integration, and modern UI/UX design. I create efficient, scalable mobile solutions 
+                that deliver exceptional user experiences.
+            </p>
+            <div class="hero-buttons">
+                <a href="#projects" class="btn btn-primary">
+                    <i class="fas fa-eye"></i>
+                    View My Work
+                </a>
+                <a href="#contact" class="btn btn-outline">
+                    <i class="fas fa-envelope"></i>
+                    Get In Touch
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">About Me</h2>
+            <div class="about-content animate-on-scroll">
+                <div class="about-text">
+                    <p>
+                        I'm a dedicated Flutter developer with a strong foundation in Computer Science and a passion for creating 
+                        innovative mobile applications. Currently pursuing my BS in Computer Science (Honors) from the University of Education, Lahore, 
+                        I combine academic knowledge with practical industry experience.
+                    </p>
+                    <br>
+                    <p>
+                        My journey in mobile development began with a deep curiosity about how technology can solve real-world problems. 
+                        I specialize in Flutter framework, Firebase services, and modern development practices. I've successfully delivered 
+                        multiple production-level applications and continue to contribute to open-source projects.
+                    </p>
+                    <br>
+                    <p>
+                        When I'm not coding, I enjoy exploring new technologies, contributing to the developer community, 
+                        and working on innovative projects that make a difference.
+                    </p>
                 </div>
-                <h1>Asad Waqas</h1>
-                <p class="subtitle">Flutter Developer | BS Computer Science</p>
-                <p class="location">📍 Lahore, Pakistan</p>
-                <div class="contact-info">
-                    <a href="tel:+923028207226" class="contact-item">
-                        <i class="fas fa-phone"></i>
-                        +92-302-8207226
-                    </a>
-                    <a href="mailto:asadwaqas.dev@gmail.com" class="contact-item">
-                        <i class="fas fa-envelope"></i>
-                        asadwaqas.dev@gmail.com
-                    </a>
-                    <a href="#" class="contact-item">
-                        <i class="fas fa-globe"></i>
-                        Portfolio
-                    </a>
-                    <a href="#" class="contact-item">
-                        <i class="fab fa-github"></i>
-                        GitHub
-                    </a>
+                <div class="stats">
+                    <div class="stat-item animate-on-scroll">
+                        <span class="stat-number">5+</span>
+                        <span class="stat-label">Projects Completed</span>
+                    </div>
+                    <div class="stat-item animate-on-scroll">
+                        <span class="stat-number">1+</span>
+                        <span class="stat-label">Years Experience</span>
+                    </div>
+                    <div class="stat-item animate-on-scroll">
+                        <span class="stat-number">2</span>
+                        <span class="stat-label">Live Apps</span>
+                    </div>
+                    <div class="stat-item animate-on-scroll">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Client Satisfaction</span>
+                    </div>
                 </div>
             </div>
-        </header>
-
-        <!-- Main Content -->
-        <div class="main-content">
-            <!-- Sidebar -->
-            <aside class="sidebar">
-                <!-- Education -->
-                <div class="content-section">
-                    <h2 class="section-title"><i class="fas fa-graduation-cap"></i> Education</h2>
-                    <div class="education-item">
-                        <div class="education-title">BS Computer Science (Honors)</div>
-                        <div class="education-school">University of Education, Lahore</div>
-                        <div class="duration">May 2025</div>
-                    </div>
-                    <div class="education-item">
-                        <div class="education-title">FSc Pre-Engineering</div>
-                        <div class="education-school">Govt. City Science College, Khudian Khas, Kasur</div>
-                        <div class="duration">Nov 2021</div>
-                    </div>
-                    <div class="education-item">
-                        <div class="education-title">Matriculation (Science)</div>
-                        <div class="education-school">Sadiq Memorial School, Khudian Khas, Kasur</div>
-                        <div class="duration">Nov 2019</div>
-                    </div>
-                </div>
-
-                <!-- Technical Skills -->
-                <div class="content-section">
-                    <h2 class="section-title"><i class="fas fa-code"></i> Technical Skills</h2>
-                    <div class="skills-grid">
-                        <div class="skill-category">
-                            <h4>Languages</h4>
-                            <div class="skill-tags">
-                                <span class="skill-tag">Dart</span>
-                                <span class="skill-tag">C</span>
-                                <span class="skill-tag">C++</span>
-                                <span class="skill-tag">Node.js</span>
-                            </div>
-                        </div>
-                        <div class="skill-category">
-                            <h4>Frameworks</h4>
-                            <div class="skill-tags">
-                                <span class="skill-tag">Flutter</span>
-                                <span class="skill-tag">Express.js</span>
-                            </div>
-                        </div>
-                        <div class="skill-category">
-                            <h4>Databases</h4>
-                            <div class="skill-tags">
-                                <span class="skill-tag">Firebase</span>
-                                <span class="skill-tag">MongoDB</span>
-                                <span class="skill-tag">MySQL</span>
-                            </div>
-                        </div>
-                        <div class="skill-category">
-                            <h4>Tools</h4>
-                            <div class="skill-tags">
-                                <span class="skill-tag">Git</span>
-                                <span class="skill-tag">GitHub</span>
-                                <span class="skill-tag">GetX</span>
-                            </div>
-                        </div>
-                        <div class="skill-category">
-                            <h4>Microsoft Office</h4>
-                            <div class="skill-tags">
-                                <span class="skill-tag">MS Excel</span>
-                                <span class="skill-tag">MS Word</span>
-                                <span class="skill-tag">MS PowerPoint</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Trainings -->
-                <div class="content-section">
-                    <h2 class="section-title"><i class="fas fa-certificate"></i> Trainings</h2>
-                    <div class="list-item">Mobile App Development – WsCube Tech</div>
-                    <div class="list-item">Node.js & Express – WsCube Tech</div>
-                    <div class="list-item">Web Development – NFTP, Lahore</div>
-                    <div class="list-item">Microsoft Office – WsCube Tech</div>
-                    <div class="list-item">SEO – DigiSkills</div>
-                </div>
-
-                <!-- Achievements -->
-                <div class="content-section">
-                    <h2 class="section-title"><i class="fas fa-trophy"></i> Achievements</h2>
-                    <div class="list-item">Successfully built and deployed multiple apps as a junior developer</div>
-                    <div class="list-item">Ongoing contributor to open-source Flutter projects on GitHub</div>
-                </div>
-            </aside>
-
-            <!-- Main Content Area -->
-            <main>
-                <!-- Work Experience -->
-                <div class="content-section">
-                    <h2 class="section-title"><i class="fas fa-briefcase"></i> Work Experience</h2>
-                    
-                    <div class="experience-item">
-                        <div class="job-header">
-                            <div>
-                                <div class="job-title">Junior Flutter App Developer</div>
-                                <div class="company">Xrossapps – Lahore, Pakistan</div>
-                            </div>
-                            <div class="duration">Dec 2024 – Present</div>
-                        </div>
-                        <div class="job-description">
-                            <ul>
-                                <li>Developing and maintaining production-level Flutter mobile applications with clean UI and efficient backend integration</li>
-                                <li>Using Firebase services (Authentication, Firestore, Storage) for seamless and scalable app functionalities</li>
-                                <li>Collaborating in Agile teams, applying version control (Git/GitHub) and managing project tasks with focus on maintainability</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="experience-item">
-                        <div class="job-header">
-                            <div>
-                                <div class="job-title">Flutter App Developer Intern</div>
-                                <div class="company">Innovage.io – Lahore, Pakistan</div>
-                            </div>
-                            <div class="duration">June 2023 – Nov 2023</div>
-                        </div>
-                        <div class="job-description">
-                            <ul>
-                                <li>Built cross-platform apps using Flutter and integrated Firebase Authentication and Firestore</li>
-                                <li>Utilized GetX for state management and improved app performance</li>
-                                <li>Gained experience in deploying apps and resolving real-world production issues</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Projects -->
-                <div class="content-section">
-                    <h2 class="section-title"><i class="fas fa-project-diagram"></i> Projects</h2>
-                    
-                    <div class="project-item">
-                        <div class="project-title">Premium Tailor Master App</div>
-                        <div class="project-year">(2024)</div>
-                        <p>A comprehensive tailoring management application with advanced features including order management, customer measurements tracking, and seamless workflow for tailoring businesses. Built with Flutter and Firebase for real-time data synchronization.</p>
-                        <ul>
-                            <li>Complete order management system</li>
-                            <li>Customer measurement tracking and history</li>
-                            <li>Real-time order status updates</li>
-                            <li>Payment integration and invoice generation</li>
-                        </ul>
-                        <a href="https://waqas-123456.web.app/" target="_blank" class="project-link">
-                            <i class="fas fa-external-link-alt"></i> View Live App
-                        </a>
-                    </div>
-
-                    <div class="project-item">
-                        <div class="project-title">Bache Gateway</div>
-                        <div class="project-year">(2024) - Real World Project from Singapore</div>
-                        <p>A sophisticated gateway application developed for Singapore market, focusing on seamless user experience and robust functionality. This real-world project demonstrates international development standards and practices.</p>
-                        <ul>
-                            <li>International market focused development</li>
-                            <li>Singapore-based client requirements</li>
-                            <li>Advanced gateway functionality</li>
-                            <li>Production-ready deployment</li>
-                        </ul>
-                        <a href="https://bachegateway.web.app/" target="_blank" class="project-link">
-                            <i class="fas fa-external-link-alt"></i> View Live App
-                        </a>
-                    </div>
-
-                    <div class="project-item">
-                        <div class="project-title">Whisper Guard FYP</div>
-                        <div class="project-year">(2025)</div>
-                        <p>An Anonymous chat app with Spam and Abuse Detection Functionality. Integrated drag-and-drop features and hosted using Firebase.</p>
-                        <ul>
-                            <li>Anonymous chat functionality</li>
-                            <li>AI-powered spam and abuse detection</li>
-                            <li>Drag-and-drop file sharing</li>
-                            <li>Firebase real-time database integration</li>
-                        </ul>
-                    </div>
-
-                    <div class="project-item">
-                        <div class="project-title">Flutter Ecommerce App</div>
-                        <div class="project-year">(2024)</div>
-                        <p>Built an eCommerce app using Flutter & Firebase, featuring cart, wishlist, order management, and payment modules. Applied clean architecture, REST APIs, and Provider for state management.</p>
-                        <ul>
-                            <li>Complete eCommerce functionality</li>
-                            <li>Shopping cart and wishlist features</li>
-                            <li>Order management system</li>
-                            <li>Payment gateway integration</li>
-                            <li>Clean architecture implementation</li>
-                        </ul>
-                    </div>
-                </div>
-            </main>
         </div>
-    </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category animate-on-scroll">
+                    <div class="skill-icon">
+                        <i class="fab fa-android"></i>
+                    </div>
+                    <h3>Mobile Development</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Flutter</span>
+                        <span class="skill-tag">Dart</span>
+                        <span class="skill-tag">Cross-platform</span>
+                        <span class="skill-tag">Material Design</span>
+                    </div>
+                </div>
+                <div class="skill-category animate-on-scroll">
+                    <div class="skill-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h3>Backend & Database</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Firebase</span>
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">Express.js</span>
+                        <span class="skill-tag">MongoDB</span>
+                        <span class="skill-tag">MySQL</span>
+                    </div>
+                </div>
+                <div class="skill-category animate-on-scroll">
+                    <div class="skill-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Programming Languages</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Dart</span>
+                        <span class="skill-tag">C</span>
+                        <span class="skill-tag">C++</span>
+                        <span class="skill-tag">JavaScript</span>
+                    </div>
+                </div>
+                <div class="skill-category animate-on-scroll">
+                    <div class="skill-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3>Tools & Technologies</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Git</span>
+                        <span class="skill-tag">GitHub</span>
+                        <span class="skill-tag">GetX</span>
+                        <span class="skill-tag">REST APIs</span>
+                    </div>
+                </div>
+                <div class="skill-category animate-on-scroll">
+                    <div class="skill-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h3>Microsoft Office</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">MS Excel</span>
+                        <span class="skill-tag">MS Word</span>
+                        <span class="skill-tag">MS PowerPoint</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="experience">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Work Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item left animate-on-scroll">
+                    <div class="timeline-content">
+                        <div class="experience-header">
+                            <h3 class="job-title">Junior Flutter App Developer</h3>
+                            <p class="company">Xrossapps – Lahore, Pakistan</p>
+                            <span class="duration">Dec 2024 – Present</span>
+                        </div>
+                        <ul>
+                            <li>Developing and maintaining production-level Flutter mobile applications with clean UI and efficient backend integration</li>
+                            <li>Using Firebase services (Authentication, Firestore, Storage) for seamless and scalable app functionalities</li>
+                            <li>Collaborating in Agile teams, applying version control (Git/GitHub) and managing project tasks with focus on maintainability</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item right animate-on-scroll">
+                    <div class="timeline-content">
+                        <div class="experience-header">
+                            <h3 class="job-title">Flutter App Developer Intern</h3>
+                            <p class="company">Innovage.io – Lahore, Pakistan</p>
+                            <span class="duration">June 2023 – Nov 2023</span>
+                        </div>
+                        <ul>
+                            <li>Built cross-platform apps using Flutter and integrated Firebase Authentication and Firestore</li>
+                            <li>Utilized GetX for state management and improved app performance</li>
+                            <li>Gained experience in deploying apps and resolving real-world production issues</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card animate-on-scroll">
+                    <div class="project-image">
+                        <i class="fas fa-cut"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Premium Tailor Master App</h3>
+                        <p class="project-year">2024</p>
+                        <p class="project-description">
+                            A comprehensive tailoring management application with advanced features including order management, 
+                            customer measurements tracking, and seamless workflow for tailoring businesses.
+                        </p>
+                        <div class="project-technologies">
+                            <span class="tech-tag">Flutter</span>
+                            <span class="tech-tag">Firebase</span>
+                            <span class="tech-tag">GetX</span>
+                            <span class="tech-tag">Dart</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://waqas-123456.web.app/" target="_blank" class="project-link primary">
+                                <i class="fas fa-external-link-alt"></i>
+                                Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card animate-on-scroll">
+                    <div class="project-image">
+                        <i class="fas fa-globe-asia"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Bache Gateway</h3>
+                        <p class="project-year">2024 - Singapore Project</p>
+                        <p class="project-description">
+                            A sophisticated gateway application developed for Singapore market, focusing on seamless user experience 
+                            and robust functionality. This real-world project demonstrates international development standards.
+                        </p>
+                        <div class="project-technologies">
+                            <span class="tech-tag">Flutter</span>
+                            <span class="tech-tag">Firebase</span>
+                            <span class="tech-tag">International</span>
+                            <span class="tech-tag">Production</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://bachegateway.web.app/" target="_blank" class="project-link primary">
+                                <i class="fas fa-external-link-alt"></i>
+                                Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card animate-on-scroll">
+                    <div class="project-image">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Whisper Guard FYP</h3>
+                        <p class="project-year">2025 - Final Year Project</p>
+                        <p class="project-description">
+                            An Anonymous chat app with Spam and Abuse Detection Functionality. Integrated drag-and-drop features 
+                            and hosted using Firebase with AI-powered content moderation.
+                        </p>
+                        <div class="project-technologies">
+                            <span class="tech-tag">Flutter</span>
+                            <span class="tech-tag">Firebase</span>
+                            <span class="tech-tag">AI Detection</span>
+                            <span class="tech-tag">Chat</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link primary">
+                                <i class="fas fa-code"></i>
+                                Coming Soon
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card animate-on-scroll">
+                    <div class="project-image">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Flutter Ecommerce App</h3>
+                        <p class="project-year">2024</p>
+                        <p class="project-description">
+                            Built an eCommerce app using Flutter & Firebase, featuring cart, wishlist, order management, 
+                            and payment modules. Applied clean architecture and modern state management.
+                        </p>
+                        <div class="project-technologies">
+                            <span class="tech-tag">Flutter</span>
+                            <span class="tech-tag">Firebase</span>
+                            <span class="tech-tag">Provider</span>
+                            <span class="tech-tag">REST API</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link primary">
+                                <i class="fab fa-github"></i>
+                                View Code
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Get In Touch</h2>
+            <p class="animate-on-scroll" style="font-size: 1.2rem; margin-bottom: 3rem; opacity: 0.9;">
+                I'm always interested in new opportunities and exciting projects. Let's discuss how we can work together!
+            </p>
+            <div class="contact-info">
+                <div class="contact-item animate-on-scroll">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <h3>Phone</h3>
+                    <a href="tel:+923028207226">+92-302-8207226</a>
+                </div>
+                <div class="contact-item animate-on-scroll">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>Email</h3>
+                    <a href="mailto:asadwaqas.dev@gmail.com">asadwaqas.dev@gmail.com</a>
+                </div>
+                <div class="contact-item animate-on-scroll">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Location</h3>
+                    <p>Lahore, Punjab, Pakistan</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="social-links">
+                <a href="#" class="social-link">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="#" class="social-link">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="mailto:asadwaqas.dev@gmail.com" class="social-link">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <a href="tel:+923028207226" class="social-link">
+                    <i class="fas fa-phone"></i>
+                </a>
+            </div>
+            <p>&copy; 2025 Asad Waqas. All rights reserved. Built with ❤️ and Flutter expertise.</p>
+        </div>
+    </footer>
 
     <script>
-        // Add smooth scrolling and interactive elements
-        document.addEventListener('DOMContentLoaded', function() {
-            // Animate sections on scroll
-            const sections = document.querySelectorAll('.content-section');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }
-                });
-            });
+        // Mobile Menu Toggle
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const navMenu = document.querySelector('.nav-menu');
 
-            sections.forEach(section => {
-                observer.observe(section);
-            });
+        mobileMenu.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
 
-            // Add click animations
-            const skillTags = document.querySelectorAll('.skill-tag');
-            skillTags.forEach(tag => {
-                tag.addEventListener('click', function() {
-                    this.style.transform = 'scale(1.1)';
-                    setTimeout(() => {
-                        this.style.transform = 'scale(1)';
-                    }, 200);
-                });
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
             });
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Animate on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Navbar background on scroll
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+                navbar.style.boxShadow = '0 2px 20px rgba(0,0,0,0.15)';
+            } else {
+                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+                navbar.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
+            }
+        });
+
+        // Typing effect for hero subtitle
+        const subtitle = document.querySelector('.hero-subtitle');
+        const text = subtitle.textContent;
+        subtitle.textContent = '';
+        let i = 0;
+
+        function typeWriter() {
+            if (i < text.length) {
+                subtitle.textContent += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, 100);
+            }
+        }
+
+        // Start typing effect after page loads
+        window.addEventListener('load', () => {
+            setTimeout(typeWriter, 1000);
+        });
+
+        // Interactive skill tags
+        document.querySelectorAll('.skill-tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                this.style.transform = 'scale(1.1)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 200);
+            });
+        });
+
+        // Project card hover effects
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-15px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(-10px)';
+            });
+        });
+
+        // Add loading animation
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.5s ease';
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
         });
     </script>
 </body>

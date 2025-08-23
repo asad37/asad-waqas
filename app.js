@@ -1,12 +1,13 @@
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
+const mongoose = require('mongoose');
 
+
+// Create HTTP Server
 const server = http.createServer((req, res) => {
-  // Set the path to your HTML file
   const filePath = path.join(__dirname, 'index.html');
 
-  // Read the file and serve it
   fs.readFile(filePath, (err, data) => {
     if (err) {
       res.writeHead(500, { 'Content-Type': 'text/plain' });
